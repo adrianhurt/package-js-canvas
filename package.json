@@ -1,0 +1,51 @@
+{
+	"name": "@adrianhurt/package-js-canvas",
+	"version": "0.1.0",
+	"description": "A canvas for a simple JS package",
+	"author": "adrianhurt",
+	"license": "MIT",
+	"main": "lib/index.js",
+	"keywords": [
+		"package",
+		"js",
+		"canvas"
+	],
+	"scripts": {
+		"clean": "rm -rf lib",
+		"clearAll": "yarn clean && rm -rf node_modules",
+		"reinstall": "yarn clearAll && yarn install",
+		"test": "jest",
+		"lint": "eslint index.js src",
+		"validate": "yarn test && yarn lint",
+		"prebuild": "yarn clean",
+		"build": "npx babel src --out-dir lib --ignore '**/*.test.js'",
+		"dist": "yarn validate && yarn build",
+		"prepublishOnly": "yarn dist"
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+			"pre-commit": "yarn validate",
+			"pre-push": "yarn validate"
+		}
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.0",
+		"@babel/preset-env": "^7.9.5",
+		"@commitlint/cli": "^8.3.5",
+		"@commitlint/config-conventional": "^8.3.4",
+		"babel-eslint": "^10.1.0",
+		"babel-jest": "^25.3.0",
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.1.0",
+		"eslint-config-airbnb-base": "^14.1.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-prettier": "^3.1.2",
+		"husky": "^4.2.5",
+		"jest": "^25.3.0",
+		"prettier": "^2.0.4"
+	}
+}
